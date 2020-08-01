@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface KeyboardHeightObserver : NSObject
-@property (nonatomic, copy) void (^keyBoardBlock)(CGFloat);
+@property (nonatomic, copy, nullable) void (^KeyBoardHeighChanged)(NSNumber* height);
 @end
 
 NS_ASSUME_NONNULL_END

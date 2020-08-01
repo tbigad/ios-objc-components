@@ -27,24 +27,30 @@
                                            selector:@selector(keybaordWillChangeFrame:)
                                                name:UIKeyboardWillChangeFrameNotification
                                              object:nil];
-    
+}
+
+- (void)dealloc
+{
     [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
-/*- (void)keybaordWillShow:(NSNotification *)notification {
+- (void)keybaordWillShow:(NSNotification *)notification {
     CGRect rect = [(NSValue *)notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    self.keyBoardBlock(rect.size.height);
-    [self.view layoutIfNeeded];
+    if(self.KeyBoardHeighChanged) {
+        self.KeyBoardHeighChanged([NSNumber numberWithFloat:rect.size.height]);
+    }
 }
 
 - (void)keybaordWillHide:(NSNotification *)notification {
-    self.keyBoardBlock(0);
-    [self.view layoutIfNeeded];
+    if(self.KeyBoardHeighChanged)
+        self.KeyBoardHeighChanged([NSNumber numberWithFloat:0.0f]);
 }
 
 - (void)keybaordWillChangeFrame:(NSNotification *)notification {
-    CGRect rect = [(NSValue *)notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    self.keyBoardBlock(rect.size.height);
-    [self.view layoutIfNeeded];
-}*/
+    if(self.KeyBoardHeighChanged)
+    {
+        CGRect rect = [(NSValue *)notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        self.KeyBoardHeighChanged([NSNumber numberWithFloat:rect.size.height]);
+    }
+}
 @end
